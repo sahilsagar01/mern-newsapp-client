@@ -3,62 +3,63 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+function Signup() {
+  const [newUser, setUser] = useState({
+    name: "",
+    password:"",
+    email: "",
+  })
 
-function Login() {
-  const navigate = useNavigate();
-  const [profile, setProfile] = useState()
-    const [existingUser, setExistingUser] = useState({
-        email: "",
-        password: ""
-    })
+const navigate = useNavigate();
 const handleChange = (e) => {
-    const {name, value} = e.target;
-    setExistingUser(pV => {
-        return {
-            ...pV,
-            [name]: value
-        }
+  const {name, value} = e.target;
+  setUser(pV => {
+    return ({
+      ...pV,
+      [name]: value
     })
-}
-const handleClick = async (e) => {
-    e.preventDefault();
-    try{
-        const url = "http://localhost:5002/login"
-        const foundUser = await axios.post(url, existingUser);
-        console.log(foundUser.data)
-        foundUser.data !== null && navigate("/")
-    }
-    catch(err){
-
-    }
+  })
 }
 
+const handleClick = async(e) => {
+  e.preventDefault();
+  try{
+    const url = "http://localhost:5002/register"
+    const savedUser = await axios.post(url, newUser);
+    console.log(savedUser)
+    savedUser.data = "success" && navigate("/login")
+  }
+  catch(err){
+    console.log(err)
+  }
 
-
-
-
+}
 
   return (
     <div className='singupCont'>
     <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="da-logo3.png" alt="logo" />
+      <a href="/" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+          <img class="w-8 h-8 mr-2 rounded-5" src="da-logo3.png" alt="logo" />
           Daily Articles    
       </a>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Sign in to your account
+                  Create a new account
               </h1>
               <form class="space-y-4 md:space-y-6" action="#">
                   <div>
+                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
+                      <input onChange={handleChange} type="text" name="name" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sahil" required />
+                  </div>
+                  <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                      <input onChange={handleChange} type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
+                      <input onChange={handleChange} type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
                   </div>
                   <div>
                       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                      <input onChange={handleChange} type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                      <input onChange={handleChange} type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                   </div>
                   <div class="flex items-center justify-between">
                       <div class="flex items-start">
@@ -69,11 +70,10 @@ const handleClick = async (e) => {
                             <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                           </div>
                       </div>
-                      <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
                   <button onClick={handleClick} type="submit" class="w-full text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Don't have an account yet? <a href="/signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                      Already have an account? <a href="/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
                   </p>
               </form>
           </div>
@@ -84,4 +84,4 @@ const handleClick = async (e) => {
   );
 }
 
-export default Login;
+export default Signup;

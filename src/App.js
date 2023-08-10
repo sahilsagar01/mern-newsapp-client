@@ -5,7 +5,7 @@ import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import FatchData from './components/FatchData';
-import Singup from './pages/Singup';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 
 
@@ -21,7 +21,7 @@ function App() {
         <Route exact path='/sports' element={<FatchData cat="sports" />} />
         <Route exact path='/politics' element={<FatchData cat="politics" />} />
         <Route exact path='/health' element={<FatchData cat="health" />} />
-        <Route exact path='/singup' element={<Singup />} />
+        <Route exact path='/signup' element={<Signup />} />
         <Route exact path='/login' element={<Login />} />
       </Routes>
       <Footer />

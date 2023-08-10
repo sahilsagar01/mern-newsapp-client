@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { Button } from 'react-bootstrap';
 
 function Navigation() {
   return (
@@ -14,7 +15,14 @@ function Navigation() {
       {['md'].map((expand) => (
         <Navbar key={expand} bg="dark" data-bs-theme="dark" expand={expand} className="bg-body-tertiary mb-3">
           <Container fluid>
-            <Navbar.Brand href="/">Daily Articles</Navbar.Brand>
+            <Navbar.Brand href="/"><img
+              alt=""
+              src="da-logo3.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}Daily Articles
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -33,7 +41,7 @@ function Navigation() {
                   <Nav.Link href="/sports">Sports</Nav.Link>
                   <Nav.Link href="/politics">Politics</Nav.Link>
                   <Nav.Link href="/health">Health</Nav.Link>
-                  <Nav.Link href="/singup">Sign up</Nav.Link>
+                  <Button href="/login" variant="outline-warning">Login</Button>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
